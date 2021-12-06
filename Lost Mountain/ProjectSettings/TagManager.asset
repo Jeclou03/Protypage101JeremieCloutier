@@ -5,8 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - oxygen
   - Oxygen
+  - Meals
+  - Snowflake
+  - Collectible
+  - DeathZone
   layers:
   - Default
   - TransparentFX

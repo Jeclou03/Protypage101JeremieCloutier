@@ -1,77 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class playerhealth : MonoBehaviour
-{
-    #region
-    public int MaxOxygen = 100;
-    public int CurrentOxygen;
-    public oxygenbar OxygenBar;
-
-    #endregion
-    private bool canTake = true;
-    private bool isSuffocate = false;
-    private bool isDead = false;
-    private Rigidbody rbPlayer;
-    //---------------------------------------------
-    void Start()
+    public class playerhealth : MonoBehaviour
     {
-        //l'oxygene max en commancant le jeu
-        CurrentOxygen = MaxOxygen;
-        OxygenBar.SetMaxHealth(MaxOxygen);
-        rbPlayer = this.GetComponent<Rigidbody>();
-    }
+        #region
+        public GameObject Flake;
 
-    void Update()
-    {   
-        //suffocation du joueur
-        if (isSuffocate == false && CurrentOxygen <= 0)
+
+        #endregion
+        private bool isSuffocate = false;
+        private bool isDead = false;
+
+        public JayScript CurrentBar;
+        
+        [SerializeField]
+        public GameObject Gm;
+
+
+        //private bool isRespawn = true;
+        private Rigidbody rbPlayer;
+        //---------------------------------------------
+        void Awake()
         {
-            rbPlayer.constraints = RigidbodyConstraints.None;
-            isSuffocate = true;
+           CurrentBar = GetComponent<JayScript>();
+           rbPlayer = this.GetComponent<Rigidbody>();
         }
 
-        //mort du joueur apres suffocation
-        if (CurrentOxygen < -20 && isDead == false)
+        void Update()
         {
-            Destroy(GameObject.FindGameObjectWithTag("Player"));
-            isDead = true;
+            //suffocation du joueur
+            if (isSuffocate == false && CurrentBar.CurrentBar <= 0)
+            {
+                Flake.transform.parent = null;
+                rbPlayer.constraints = RigidbodyConstraints.None;
+                isSuffocate = true;
+            }
+
+            //mort du joueur apres suffocation et reload de la scene
+            if (CurrentBar.CurrentBar < -300 && isDead == false)
+            {
+                isDead = true;
+                Gm.GetComponent<GameManager>().AddGameplayed();
+                SceneManager.LoadScene(0);
+            }
+        }
+        private void OnTriggerEnter(Collider collider)
+        {
+            if (collider.gameObject.tag == "DeathZone")
+            {
+                CurrentBar.CurrentBar = 0;
+            }
         }
 
-        // system de perte d'oxygene par seconde (1/3)
-        if (canTake == true)
-        {
-            TakeDamage(5);
-            canTake = false;
-            StartCoroutine(WaitToTake());
-        }
     }
-
-    IEnumerator WaitToTake()
-    {
-        // (2/3)
-        yield return new WaitForSeconds(1);
-        canTake = true;
-    }
-
-    void TakeDamage(int damage)
-    {
-        // (3/3)
-        CurrentOxygen -= damage;
-        OxygenBar.SetHealth(CurrentOxygen);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        // remise au max de l'oxygene lors d'une collision avec "oxygen bottle"
-        if (collision.gameObject.tag == "Oxygen")
-        {
-            OxygenBar.SetMaxHealth(MaxOxygen);
-            CurrentOxygen = MaxOxygen;
-        }
-    }
-}
 
 
 
