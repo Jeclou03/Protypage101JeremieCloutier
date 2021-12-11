@@ -8,11 +8,11 @@ using UnityEngine;
         public int MaxBar = 1000;
         public int CurrentBar;
         public oxygenbar UiBar;
-        
+        public moveplayer CanStart;
         #endregion
         private bool canTake = true;
         private Rigidbody rbPlayer;
-        public moveplayer CanStart;
+        
 
         private void Awake()
         {

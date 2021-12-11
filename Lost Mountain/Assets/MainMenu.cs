@@ -8,27 +8,23 @@ public class MainMenu : MonoBehaviour
     public string LevelLostMountain;
 
     #endregion
+
+    //switch de scene à SampleScene(lostMountain)
     public void StartGame()
     {
         SceneManager.LoadScene(LevelLostMountain);
     }
+
+    // option de mettre en full screen
     public void SetFullScreen(bool IsFullScreen)
     {
         Screen.fullScreen = IsFullScreen;
     }
+
+    // quitter le jeu
     public void QuitGame()
     {
         Application.Quit();
     }
     
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

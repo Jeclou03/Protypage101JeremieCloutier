@@ -7,20 +7,15 @@ using UnityEngine.SceneManagement;
     {
         #region
         public GameObject Flake;
-
-
+        public JayScript CurrentBar;
         #endregion
         private bool isSuffocate = false;
         private bool isDead = false;
+        private Rigidbody rbPlayer;
 
-        public JayScript CurrentBar;
-        
         [SerializeField]
         public GameObject Gm;
 
-
-        //private bool isRespawn = true;
-        private Rigidbody rbPlayer;
         //---------------------------------------------
         void Awake()
         {
@@ -48,6 +43,7 @@ using UnityEngine.SceneManagement;
         }
         private void OnTriggerEnter(Collider collider)
         {
+            // mort du joueur si collision avec la deathzone
             if (collider.gameObject.tag == "DeathZone")
             {
                 CurrentBar.CurrentBar = 0;
