@@ -6,7 +6,7 @@ public class MainMenu : MonoBehaviour
 {
     #region
     public string LevelLostMountain;
-
+    public bool TwoPlayerIsLoad = false;
     #endregion
 
     //switch de scene à SampleScene(lostMountain)
@@ -27,4 +27,10 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
     
+    // jouer avec un ami
+    public void WithAFriend()
+    {
+        SceneManager.LoadScene(LevelLostMountain);
+        TwoPlayerIsLoad = true;
+    }
 }

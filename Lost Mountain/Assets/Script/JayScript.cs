@@ -8,22 +8,22 @@ using UnityEngine;
         public int MaxBar = 1000;
         public int CurrentBar;
         public oxygenbar UiBar;
-        public moveplayer CanStart;
+        
         #endregion
         private bool canTake = true;
-        private Rigidbody rbPlayer;
-        
+        private Rigidbody rb;
+        public bool CanStart;
 
         private void Awake()
         {
-            CanStart = GetComponent<moveplayer>();
+            CanStart = GetComponent<Move>();
         }
         void Start()
         {
             //Bar max en commancant le jeu
             CurrentBar = MaxBar;
             UiBar.SetMaxHealth(MaxBar);
-            rbPlayer = this.GetComponent<Rigidbody>();
+            rb = this.GetComponent<Rigidbody>();
             
         }
 

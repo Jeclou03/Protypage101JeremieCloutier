@@ -1,15 +1,15 @@
 using UnityEngine;
 
-public class moveplayer : MonoBehaviour
+public class moveplayer : Player
 {
-    #region
+    /*#region
     public Vector3 Jump = new Vector3(0, 5f, 0);
     public float Speed = 10f;
     public bool IsJumping = false;
+
     #endregion
     private JayScript playerHealth;
     private Rigidbody rbPlayer;
-    
     //--------------------------------------------
     private void Awake()
     {
@@ -18,30 +18,37 @@ public class moveplayer : MonoBehaviour
     }
     void Update()
     {
-
-        if (playerHealth.CurrentBar > 0 )
+        //if(player.id == 0)
         {
-            //si le joueur est encore en vie: facon de bouger le joueur
-            transform.Translate(Vector3.forward * Speed * Time.deltaTime);
-
-            if (Input.GetKey(KeyCode.A))
+            if (playerHealth.CurrentBar > 0)
             {
-                transform.Translate(Vector3.left * Speed * Time.deltaTime);
-            }
+                //si le joueur est encore en vie: facon de bouger le joueur
+                transform.Translate(Vector3.forward * Speed * Time.deltaTime);
 
-            if (Input.GetKey(KeyCode.D))
-            {
-                transform.Translate(Vector3.right * Speed * Time.deltaTime);
-            }
-
-            if (Input.GetKey(KeyCode.W))
-            {
-                if (!IsJumping)
+                if (Input.GetKey(KeyCode.A))
                 {
-                    rbPlayer.AddForce(Jump, ForceMode.Impulse);
-                    IsJumping = true;
+                    transform.Translate(Vector3.left * Speed * Time.deltaTime);
+                }
+
+                if (Input.GetKey(KeyCode.D))
+                {
+                    transform.Translate(Vector3.right * Speed * Time.deltaTime);
+                }
+
+                if (Input.GetKey(KeyCode.W))
+                {
+                    if (!IsJumping)
+                    {
+                        rbPlayer.AddForce(Jump, ForceMode.Impulse);
+                        IsJumping = true;
+                    }
                 }
             }
+            //else if(playerID == 1)
+            {
+
+            }
+        
         }
         
         //limite de mouvement sur l'axe Y
@@ -63,11 +70,6 @@ public class moveplayer : MonoBehaviour
         {
             IsJumping = false;
         }
-         
-        if (collision.gameObject.tag == "Meals")
-        {
-            Speed += 5;
-        }
-    }
+    }*/
 }
 
