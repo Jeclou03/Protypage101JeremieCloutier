@@ -2,39 +2,53 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    private Rigidbody rb;
+    
     public float Speed = 10f;
+    public float Bounce = 20f;
     public Vector3 Jump = new Vector3(0, 5f, 0);
+    public Vector3 ImBouncing = new Vector3(0, 10f, 0);
     public bool IsJumping = false;
-
+    public bool IsBouncing = false;
+    public static Move Instance;
+    public Player CanWalk;
+    private Rigidbody rb;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        CanWalk = GetComponent<Player>();
+
+        if (Instance != null)
+        {
+            return;
+        }
+        Instance = this;
     }
     void Update()
     {
-        //facon de bouger le joueur
-        transform.Translate(Vector3.forward * Speed * Time.deltaTime);
-
-        if (Input.GetKey(KeyCode.A))
+        if(CanWalk.CanWalk == true && IsBouncing == false)
         {
-            transform.Translate(Vector3.left * Speed * Time.deltaTime);
-        }
+            //facon de bouger le joueur
+            transform.Translate(Vector3.forward * Speed * Time.deltaTime);
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Translate(Vector3.right * Speed * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            if (!IsJumping)
+            if (Input.GetKey(KeyCode.A))
             {
-                rb.AddForce(Jump, ForceMode.Impulse);
-                IsJumping = true;
+                transform.Translate(Vector3.left * Speed * Time.deltaTime);
+            }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.Translate(Vector3.right * Speed * Time.deltaTime);
+            }
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                if (!IsJumping)
+                {
+                    rb.AddForce(Jump, ForceMode.Impulse);
+                    IsJumping = true;
+                }
             }
         }
-
 
         //limite de mouvement sur l'axe Y
         if (transform.position.x <= -15)
@@ -54,6 +68,14 @@ public class Move : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             IsJumping = false;
+            IsBouncing = false;
+        }
+
+        if (collision.gameObject.tag == "Obstacles")
+        {
+            rb.AddForce(ImBouncing, ForceMode.Impulse);
+            transform.Translate(Vector3.back * Bounce * Time.deltaTime);
+            IsBouncing = true;
         }
     }
 }

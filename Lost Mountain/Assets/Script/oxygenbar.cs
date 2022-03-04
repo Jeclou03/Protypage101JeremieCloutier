@@ -6,7 +6,6 @@ public class oxygenbar : MonoBehaviour
 {
     #region
     public Slider SliderBar;
-
     #endregion
     //----------------
     //max d oxygen au commencement de la partie

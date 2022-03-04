@@ -10,6 +10,7 @@ TagManager:
   - Snowflake
   - Collectible
   - DeathZone
+  - Obstacles
   layers:
   - Default
   - TransparentFX
