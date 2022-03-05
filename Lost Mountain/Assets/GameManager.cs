@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    // mis a jour dans la prochaine version
     public int GamePlayed = 0;
     public int NbrOfCollectible;
 

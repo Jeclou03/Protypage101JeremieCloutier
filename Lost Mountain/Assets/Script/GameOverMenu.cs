@@ -14,18 +14,18 @@ public class GameOverMenu : MonoBehaviour
         }
         Instance = this;
     }
-
+    //lors de la mort du joueur
     public void GameOver()
     {
         GameOverMenuUi.SetActive(true);
     }
-
+    //possiblite de restart la partie vas etre possible dans la version final
     public void Restart()
     {
         GameOverMenuUi.SetActive(false);
-        // la possibliter de restert la partie vas etre possible dans la version final
+        
     }
-
+    //possiblite de retourner au menu principale
     public void ReturnToMainMenu()
     {
         GameOver();

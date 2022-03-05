@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    
+    #region Variable
     public float Speed = 10f;
     public float Bounce = 20f;
     public Vector3 Jump = new Vector3(0, 5f, 0);
@@ -11,7 +11,9 @@ public class Move : MonoBehaviour
     public bool IsBouncing = false;
     public static Move Instance;
     public Player CanWalk;
+    
     private Rigidbody rb;
+    #endregion
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -25,10 +27,15 @@ public class Move : MonoBehaviour
     }
     void Update()
     {
-        if(CanWalk.CanWalk == true && IsBouncing == false)
+        if(CanWalk.CanWalk)
         {
             //facon de bouger le joueur
-            transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+            //si le joueur a eu une collision avec un obstacle,il ne peut pas avancer
+            if (IsBouncing == false)
+            {
+                transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+            }
+            
 
             if (Input.GetKey(KeyCode.A))
             {
@@ -40,9 +47,10 @@ public class Move : MonoBehaviour
                 transform.Translate(Vector3.right * Speed * Time.deltaTime);
             }
 
+            // contrainte de saut
             if (Input.GetKey(KeyCode.W))
             {
-                if (!IsJumping)
+                if (!IsJumping && IsBouncing == false)
                 {
                     rb.AddForce(Jump, ForceMode.Impulse);
                     IsJumping = true;
@@ -70,7 +78,7 @@ public class Move : MonoBehaviour
             IsJumping = false;
             IsBouncing = false;
         }
-
+        //approbation de bounce
         if (collision.gameObject.tag == "Obstacles")
         {
             rb.AddForce(ImBouncing, ForceMode.Impulse);

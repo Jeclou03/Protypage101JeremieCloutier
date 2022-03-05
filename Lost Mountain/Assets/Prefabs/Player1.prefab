@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 6475142948425696568}
   - component: {fileID: 6475142948425696574}
   - component: {fileID: 6475142948425696549}
-  - component: {fileID: 6475142948425696551}
+  - component: {fileID: 3742262653610815815}
   - component: {fileID: 6475142948425696569}
-  - component: {fileID: -6835241272297001647}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -116,7 +115,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &6475142948425696551
+--- !u!114 &3742262653610815815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,20 +149,5 @@ MonoBehaviour:
   Jump: {x: 0, y: 35, z: 0}
   ImBouncing: {x: 0, y: 30, z: 0}
   IsJumping: 0
-  CanWalk: {fileID: 0}
   IsBouncing: 0
---- !u!114 &-6835241272297001647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6475142948425696575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ab78f7edd9e7604386060fbffcdd3e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FlakePrefab: {fileID: 5695661376263075192, guid: 34b37f7636cbdac40a2d3a8c07b51318, type: 3}
-  FlakeInstance: {fileID: 0}
-  CanWalk: 1
+  CanWalk: {fileID: 0}

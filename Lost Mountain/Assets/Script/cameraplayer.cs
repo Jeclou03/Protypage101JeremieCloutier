@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class cameraplayer : MonoBehaviour
+public class CameraPlayer : MonoBehaviour
 {
     #region
     public GameObject Player;

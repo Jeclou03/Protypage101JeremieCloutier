@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class SnowFlake : MonoBehaviour
@@ -15,6 +14,5 @@ public class SnowFlake : MonoBehaviour
         {
             transform.position = new Vector3(-3.70f, gameObject.transform.position.y, gameObject.transform.position.z);
         }
-        // detacher du joueur lors de sa soffucation
     }
 }

@@ -1,12 +1,9 @@
-
 using UnityEngine;
 using UnityEngine.UI;
 
-public class oxygenbar : MonoBehaviour
+public class OxygenBar : MonoBehaviour
 {
-    #region
     public Slider SliderBar;
-    #endregion
     //----------------
     //max d oxygen au commencement de la partie
     public void SetMaxHealth(int health)
