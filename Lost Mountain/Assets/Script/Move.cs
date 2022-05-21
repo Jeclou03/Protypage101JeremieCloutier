@@ -4,18 +4,23 @@ public class Move : MonoBehaviour
 {
     #region Variable
     public float Speed = 10f;
-    public float Bounce = 20f;
-    public Vector3 Jump = new Vector3(0, 5f, 0);
-    public Vector3 ImBouncing = new Vector3(0, 10f, 0);
+    public float Bounce;
+    public Vector3 Jump = new Vector3(0, 10f, 0);
+    public Vector3 ImBouncing = new Vector3(0, 1000, 0);
     public bool IsJumping = false;
     public bool IsBouncing = false;
     public static Move Instance;
     public Player CanWalk;
-    
+
+    public Animator animator;
+    public SoundEffect soundEffect;
+
+
     private Rigidbody rb;
     #endregion
     private void Awake()
     {
+        soundEffect = GetComponent<SoundEffect>();
         rb = GetComponent<Rigidbody>();
         CanWalk = GetComponent<Player>();
 
@@ -37,14 +42,14 @@ public class Move : MonoBehaviour
             }
             
 
-            if (Input.GetKey(KeyCode.A))
-            {
-                transform.Translate(Vector3.left * Speed * Time.deltaTime);
-            }
-
             if (Input.GetKey(KeyCode.D))
             {
                 transform.Translate(Vector3.right * Speed * Time.deltaTime);
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.Translate(Vector3.left * Speed * Time.deltaTime);
             }
 
             // contrainte de saut
@@ -59,15 +64,19 @@ public class Move : MonoBehaviour
         }
 
         //limite de mouvement sur l'axe Y
-        if (transform.position.x <= -15)
+        if (transform.position.x <= -17)
         {
-            transform.position = new Vector3(-15, gameObject.transform.position.y, gameObject.transform.position.z);
+            transform.position = new Vector3(-17, gameObject.transform.position.y, gameObject.transform.position.z);
         }
 
-        if (transform.position.x >= 3)
+        if (transform.position.x >= 4.5f)
         {
-            transform.position = new Vector3(3, gameObject.transform.position.y, gameObject.transform.position.z);
+            transform.position = new Vector3(4.5f, gameObject.transform.position.y, gameObject.transform.position.z);
         }
+
+        //Animation du jump et du bounce
+        animator.SetBool("JumpAnim", IsJumping);
+        animator.SetBool("IsHit", IsBouncing);
     }
 
     private void OnCollisionEnter(Collision collision)

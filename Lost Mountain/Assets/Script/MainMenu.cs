@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class MainMenu : MonoBehaviour
 {
     #region
     public string LevelLostMountain;
     public bool TwoPlayerIsLoad = false;
+    public AudioMixer audiomixer;
     #endregion
 
     //switch de scene à SampleScene(lostMountain)
@@ -25,11 +27,14 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
-    
-    // jouer avec un ami
-    public void WithAFriend()
+
+    public void SetMusic(float volume)
     {
-        SceneManager.LoadScene(LevelLostMountain);
-        TwoPlayerIsLoad = true;
+        audiomixer.SetFloat("Music", volume);
+    }
+
+    public void SetSound(float volume)
+    {
+        audiomixer.SetFloat("Sound", volume);
     }
 }

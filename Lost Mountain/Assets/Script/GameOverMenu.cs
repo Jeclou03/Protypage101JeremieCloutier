@@ -19,12 +19,6 @@ public class GameOverMenu : MonoBehaviour
     {
         GameOverMenuUi.SetActive(true);
     }
-    //possiblite de restart la partie vas etre possible dans la version final
-    public void Restart()
-    {
-        GameOverMenuUi.SetActive(false);
-        
-    }
     //possiblite de retourner au menu principale
     public void ReturnToMainMenu()
     {

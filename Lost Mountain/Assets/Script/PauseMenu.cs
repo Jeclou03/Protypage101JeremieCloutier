@@ -1,14 +1,15 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool gameIsPaused = false;
     public string SetMainMenu;
-    public GameObject pauseMenuUI;
-    
+    public GameObject PauseMenuUI;
+    public GameObject TutoMenuUi;
+    public AudioMixer audiomixer;
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -26,14 +27,15 @@ public class PauseMenu : MonoBehaviour
 
     void Paused()
     {
-        pauseMenuUI.SetActive(true);
+        TutoMenuUi.SetActive(false);
+        PauseMenuUI.SetActive(true);
         Time.timeScale = 0;
         gameIsPaused = true;
     }
 
     public void Resume()
     {
-        pauseMenuUI.SetActive(false);
+        PauseMenuUI.SetActive(false);
         Time.timeScale = 1;
         gameIsPaused = false;
     }
@@ -42,5 +44,15 @@ public class PauseMenu : MonoBehaviour
     {
         Resume();
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void SetMusic(float volume)
+    {
+        audiomixer.SetFloat("Music", volume);
+    }
+
+    public void SetSound(float volume)
+    {
+        audiomixer.SetFloat("Sound", volume);
     }
 }
